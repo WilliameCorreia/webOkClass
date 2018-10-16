@@ -54,11 +54,14 @@
 
                     <div class="form-group">
                         <button id="Acessar" type="submit" class="btn btn-primary">Acessar</button>
+                        <div style="text-align:center;">
+                            <a href="@Url.Action("PaginaPrincipal","Home")">Pagina principal</a>
+                        </div>                        
                     </div>
 
                     <div class="form-group">
                         <small id="senhaAjuda" class="form-text text-muted">Caso tenha esquecido sua senha clique em </small>
-                        <a class="Recuperar" href="Recuperar senha.html"> Recuperar Senha</a>
+                        <a class="Recuperar" href="@Url.Action("RecuperarSenha","Home")"> Recuperar Senha</a>
                     </div>
 
                     <hr color='grey'>
@@ -67,7 +70,7 @@
                             Caso não tenha uma conta
                         </span>
 
-                        <a class="cadastro" href="Cadastro.html"> Cadastrar</a>
+                        <a class="cadastro" href="@Url.Action("Cadastro","Home")"> Cadastrar</a>
 
                     </div>
                 </form>

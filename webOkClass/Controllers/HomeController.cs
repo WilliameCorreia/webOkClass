@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace webOkClass.Controllers
 {
     public class HomeController : Controller
@@ -17,6 +15,16 @@ namespace webOkClass.Controllers
         }
 
         public IActionResult Cadastro()
+        {
+            return View();
+        }
+
+        public IActionResult RecuperarSenha()
+        {
+            return View();
+        }
+
+        public IActionResult PaginaPrincipal()
         {
             return View();
         }
