@@ -1,0 +1,49 @@
+
+/*ESTILO DO INDEX.HTML*/
+body{
+	 background: url('../images/imgBackground.jpg');
+}
+
+nav{
+	background-image: url('../images/orig.jpg');
+            background-size: contain;
+            color: white; 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+}
+
+ div.col-sm-4{
+ 	width: 600px;
+ 	margin-left: 350px;
+ 	margin-top: 50px;
+ }
+
+ div #simbolo{
+ 	 width: 200px;
+ 	 margin-left: 90px;
+ }
+
+ form.form-horizontal{
+ 	margin-left: 50px;
+ }
+
+ button#Acessar{
+	width: 250px; margin-left:20px;
+ }
+
+ a.Recuperar{
+ 	margin-left: 150px;
+ }
+ a.cadastro{
+ 	color: #4ad440;
+
+ }
+
+ footer #rodape, h6{
+	height: 20%;margin-left: 1%;
+ 	color: black;
+ }
+
+
+

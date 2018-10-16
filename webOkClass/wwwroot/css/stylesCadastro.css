@@ -1,0 +1,35 @@
+/*ESTILO DO CADASTRO.HTML*/
+div #simb-nav{
+	width: 50px;
+	margin-left: 10px;
+
+}
+
+h2{
+	margin-left: 50px;
+}
+
+hr{
+	background-color: #4ad459;
+}
+
+nav #formul{
+	margin-top: -12px; 
+}
+
+div #form1{
+	 width: 500px; margin-left: 50px;
+}
+form.needs-validation{
+	width: 500px; margin-left: 50px;margin-bottom: -1%; 
+}
+div #form2{
+	 width: 500px; margin-left: 5px;
+}
+
+footer #rodape{
+	 bottom: 1;width: 100%;margin-top: 10px;	
+}
+div #text{
+	color: white;
+}

@@ -1,0 +1,25 @@
+div #simbolo{
+	width: 50px;margin-left: 10px;
+}
+h2{
+	margin-left: 50px;
+}
+hr{
+	background-color: #4ad459;
+}
+nav.form-group{
+	margin-top: -12px; 
+}
+div #model{
+	width: 500px; margin-left: 50px;
+}
+p{
+	margin-left: 50px;
+}
+
+footer #rodap{
+	bottom: 0;width: 100%; position: absolute;
+}
+div #rodape{
+	color: white;
+}
