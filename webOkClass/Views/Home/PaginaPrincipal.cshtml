@@ -2,10 +2,9 @@
 <html>
 
 <head>
-    <link rel="icon" type="image/png" href="images/icons/icon.ico" />
+    <link rel="icon" type="image/png" href="~/images/icons/icon.ico" />
 
-    <link rel="stylesheet" type="text/css" href="css/stylesPrincipal.css">
-
+    <link rel="stylesheet" type="text/css" href="~/css/stylesPrincipal.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -31,9 +30,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <div>
-                    <img id="simbolo" src="images/icons/simbolo.png" alt=simbolo>
+                    <img id="simbolo" src="~/images/icons/simbolo.png" alt=simbolo>
                 </div>
-                <a class="navbar-brand" href="Cadastro.html">OK Class</a>
+                <a class="navbar-brand" href="@Url.Action("PaginaPrincipal","Home")">OK Class</a>
 
                 <div id="lista" class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
