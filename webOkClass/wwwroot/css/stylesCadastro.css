@@ -5,31 +5,26 @@ div #simb-nav{
     image-resolution:from-image;
 }
 
-h2{
-	margin-left: 50px;
+h2 {
+    margin: 3% !important;
 }
 
-hr{
-	background-color: #4ad459;
+form {
+    margin-left: 30%;
+    margin-right: 30%
 }
 
-nav #formul{
-	margin-top: -12px; 
+#BtnCadastra {
+    text-align: right;
 }
 
-div #form1{
-	 width: 500px; margin-left: 50px;
-}
-form.needs-validation{
-	width: 500px; margin-left: 50px;margin-bottom: -1%; 
-}
-div #form2{
-	 width: 500px; margin-left: 5px;
+.form div {
+    margin-top: 5px;
 }
 
-footer #rodape{
-	 bottom: 1;width: 100%;margin-top: 10px;	
+.form-row div {
+    margin: 0;
 }
-div #text{
-	color: white;
+nav form{
+    margin: 0;
 }

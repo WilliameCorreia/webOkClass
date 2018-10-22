@@ -1,29 +1,26 @@
-﻿<!DOCTYPE html>
+﻿@model webOkClass.Models.Usuario
+
+<!DOCTYPE html>
 <html>
 
 <head>
+    <title> Cadastro de usuário</title>
     <link rel="icon" type="image/icon" href="~/images/icons/icon.ico" />
-    
     <link rel="stylesheet" type="text/css" href="~/css/stylesCadastro.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    @*scripts offine*@
+    <script src="~/Distro/Jquery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="~/Distro/css/bootstrap.css" />
+    <script src="~/Distro/js/bootstrap.js"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-    <title> Cadastro de usuário</title>
-
+    @*scripts online
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>*@
 
 </head>
-
 
 <body>
 
@@ -44,130 +41,106 @@
         </div>
     </nav>
 
-    <br>
-    <br>
 
-    <h2>Cadastro de Usuário</h2>
-    <br>
-    <hr>
 
-    <nav id="formul" class="form-group">
-        <div class="Container">
-            <form id="form1" class="needs-validation">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Endereço de e-mail</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">Nós nunca vamos compartilhar seu e-mail com mais ninguém.</small>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Senha</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Confirmar Senha</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
+    @using (Html.BeginForm("AddUsuario", "Home", FormMethod.Post, new { @class = "form container" }))
+    {
+        <h2>Cadastro de Usuário</h2>
 
-            </form>
+        <div class="form-row">
+            <div class="col-sm-4">
+                <label for="validationCustom01">Primeiro nome</label>
+                <input name="Nome" type="text" class="form-control" id="validationCustom01" placeholder="Seu primeiro nome" value="" required>
+            </div>
+            <div class="col-sm-4">
+                <label for="validationCustom02">Último Nome</label>
+                <input name="Sobrenome" type="text" class="form-control" id="validationCustom02" placeholder="Seu último nome" value="" required>
+            </div>
+            <div class="col-sm-4">
+                <label for="exampleInputEmail1">Endereço de e-mail</label>
+                <input type="email" name="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> 
+            </div>
         </div>
-
-
-        <form class="needs-validation" novalidate>
-            <div class="form-group">
-                <label for="validationustom01">Primeiro nome</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="Seu primeiro nome" value="" required>
-                <div class="valid-feedback">
-                    ok!
-                </div>
-            </div>
-            <label for="validationCustom02">Último Nome</label>
-            <input type="text" class="form-control" id="validationCustom02" placeholder="Seu último nome" value="" required>
-            <div class="valid-feedback">
-                ok!
-            </div>
-            
-            <br>
-            <div class="form-row">
-                <div class="col-0md-6 mb-3">
-                    <label for="validationCustomUsername">Id-Matrícula</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupPrepend">#COD</span>
-                        </div>
-                        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Numero de Id-Matrícula" aria-describedby="inputGroupPrepend" required>
-                        <div class="invalid-feedback">
-                            Por favor, descreva seu nome de usuário.
-                        </div>
+        <div class="form-row">
+            <div class="col-sm-3">
+                <label for="validationCustomUsername">Id-Matrícula</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend">#COD</span>
                     </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-6 mb-3">
-                    <label for="validationCustom05">CPF</label>
-                    <input type="text" class="form-control" id="validationCustom05" placeholder="CPF" required>
+                    <input name="Matricula" type="text" class="form-control" id="validationCustomUsername" placeholder="Numero de Id-Matrícula" aria-describedby="inputGroupPrepend" required>
                     <div class="invalid-feedback">
-                        Por favor, forneça seu CPF válido.
+                        Por favor, descreva seu nome de usuário.
                     </div>
                 </div>
-
-                <div class="form-row">
-                    <div class="col-0 md-6 mb-3">
-                        <label for="validationCustom05">Celular</label>
-                        <input type="text" class="form-control" id="validationCustom05" placeholder="Nº Celular" required>
-                        <div class="invalid-feedback">
-                            Por favor, forneça um numero válido.
-                        </div>
-                    </div>
-                </div>
-
-                <div id="form2" class="form-group">
-                    <label for="validationCustom03">Endereço</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Ex: Rua, Nº, Bairro, Cidade e Estado" required>
-                    <div class="invalid-feedback">
-                        Por favor, forneça uma cidade válida.
-                    </div>
-                </div>
-
-
             </div>
-
-            
-            <div class="Container">
+            <div class="col-sm-3">
+                <label for="exampleInputPassword1">Senha</label>
+                <input name="Senha" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="col-sm-3">
+                <label for="exampleInputPassword1">Confirmar Senha</label>
+                <input name="Password" type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            </div>
+            <div class="col-sm-3">
+                <label for="validationCustom05">CPF</label>
+                <input name="Cpf" type="text" class="form-control" id="validationCustom05" placeholder="CPF" required>
+                <div class="invalid-feedback">
+                    Por favor, forneça seu CPF válido.
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-sm-4">
+                <label for="validationCustom06"> Selecione o seu Campus </label>
+                <select name="Campus" class="custom-select custom-select-sm">
+                    <option value="">Selecione uma opção </option>
+                    <option value="1">  Fametro - Conselheiro Estelita</option>
+                    <option value="2">  Fametro - Guilherme Rocha</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-0 md-6 mb-3">
+                    <label for="validationCustom06">Celular</label>
+                    <input name="Telefone" type="text" class="form-control" id="validationCustom06" placeholder="Nº Celular" required>
+                    <div class="invalid-feedback">
+                        Por favor, forneça um numero válido.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="validationCustom03">Endereço</label>
+                <input name="Endereço" type="text" class="form-control" id="validationCustom03" placeholder="Ex: Rua, Nº, Bairro, Cidade e Estado" required>
+                <div class="invalid-feedback">
+                    Por favor, forneça uma cidade válida.
+                </div>
+            </div>
+        </div>       
+        <div class="form-row">
+            <div class="col-sm-4">
                 <label for="validationCustom06"> Tipo de Funcionário</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                    <label class="form-check-label" for="exampleRadios3">
+                    <input class="form-check-input" type="radio" name="TipoFuncionario" id="exampleRadios1" value="1">
+                    <label class="form-check-label" for="exampleRadios1">
                         Professor
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked>
+                    <input class="form-check-input" type="radio" name="TipoFuncionario" id="exampleRadios2" value="2">
                     <label class="form-check-label" for="exampleRadios2">
                         Monitor-Chave
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" checked>
-                    <label class="form-check-label" for="exampleRadios1">
+                    <input class="form-check-input" type="radio" name="TipoFuncionario" id="exampleRadios3" value="3">
+                    <label class="form-check-label" for="exampleRadios3">
                         Limpeza
                     </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios0" value="option0" checked>
-                    <label class="form-check-label" for="exampleRadios0">
-                        Selecione o tipo acima
-                    </label>
-                </div>
+                </div>               
             </div>
-            <br>
-            <label for="validationCustom06">----------------------- Selecione o seu Campus -----------------------</label>
-            <select class="custom-select custom-select-sm">
-                <option selected> </option>
-                <option value="1">  Fametro - Conselheiro Estelita</option>
-                <option value="2">  Fametro - Guilherme Rocha</option>
-            </select>
-            <div class="form-group">
+        </div>
+        <div class="form-row">
+            <div class="col-sm-12">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                     <label class="form-check-label" for="invalidCheck">
@@ -177,39 +150,40 @@
                         Você deve concordar antes de enviar.
                     </div>
                 </div>
+            </div>        
+        </div>
+        <div class="form-row">
+            <div id="BtnCadastra" class="col-sm-12">
+                <!-- Button trigger modal -->
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Cadastrar
+                </button>
             </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Cadastrar
-            </button>
+        </div>
+    }
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Cadastro de Usuário</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Quase tudo Pronto! para salvar suas informações preenchidas Clique em Salvar Cadastro.
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de Usuário</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Quase tudo Pronto! para salvar suas informações preenchidas Clique em Salvar Cadastro.
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <a class="" href="PaginaPrincipal.html">
-                                <button type="button" class="btn btn-primary">Salvar Cadastro </button>
-                            </a>
-                        </div>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Salvar Cadastro </button>
                 </div>
             </div>
-        </form>
-    </nav>
-    <br>
-
+        </div>
+    </div>
+    <!-- Fim do modal-->
     <footer>
         <div class="footer">
             <nav id="rodape" class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -221,27 +195,25 @@
     </footer>
 
     <script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
     </script>
-
-
 
 </body>
 </html>
