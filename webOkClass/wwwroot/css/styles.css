@@ -1,40 +1,40 @@
 
 /*ESTILO DO INDEX.HTML*/
-body{
-	 background: url('../images/imgBackground.jpg');
+body {
+    background: url('../images/imgBackground.jpg');
+    background-repeat: round;
+    height: 100%;
+    width: 100%;
 }
 
-nav{
-	background-image: url('../images/orig.jpg');
-            background-size: contain;
-            color: white; 
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
+.panel {
+    background-image: url('../images/orig.jpg');
+    background-repeat: round;
+    padding: 10px;
+    margin-top: 14%;
+    margin-bottom: auto;
+    height: auto;
 }
 
- div.col-sm-4{
- 	width: 600px;
- 	margin-left: 350px;
- 	margin-top: 50px;
- }
+.painel {
+    margin-left: auto;
+    margin-right: auto;  
+}
 
  div #simbolo{
- 	 width: 200px;
- 	 margin-left: 90px;
+ 	 width: 150px;
+ 	 
  }
+.panel-heading {
+    text-align: center;
+}
 
- form.form-horizontal{
- 	margin-left: 50px;
- }
-
- button#Acessar{
-	width: 250px; margin-left:20px;
- }
+form.form-horizontal {
+    margin-left: 50px;
+}
 
  a.cadastro{
  	color: #4ad440;
-
  }
 
  footer #rodape, h6{

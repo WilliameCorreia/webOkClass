@@ -25,49 +25,44 @@ namespace webOkClass.Controllers
         [HttpPost]
         public IActionResult PaginaPrincipal(string Email, string Senha)
         {
-            bool resultado = ValidationLogin(Email, Senha);
+            if (ModelState.IsValid)
+            {
+                string CfSenha = null;
+                Usuario Dbusuario = null;
 
-            if (resultado)
-            {
-                return View();
+                IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == Email select dados;
+
+                foreach (Usuario dados in DbObjeto)
+                {
+                    Dbusuario = dados;
+                    CfSenha = dados.Senha;
+                }
+
+                if (CfSenha == Senha)
+                {
+                    return View(Dbusuario);
+                }
+                else
+                {
+                    return View("Index");
+                }
             }
-            else
-            {
-                return Redirect("Index");
-            }
+            return View("Index");       
            
         }
 
-        public bool ValidationLogin(string Email, string Senha)
-        {
-            string CfSenha = null;
-
-            IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == Email select dados;
-
-            foreach (Usuario dados in DbObjeto)
-            {
-                CfSenha = dados.Senha;
-            }
-
-            if (CfSenha == Senha)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-                      
-
-        }
 
         [HttpPost]
-        public void AddUsuario(Usuario usuario)
+        public IActionResult AddUsuario(Usuario usuario)
         {
-            _webOkClassContext.Add(usuario);
+            if (ModelState.IsValid)
+            {
+                _webOkClassContext.Add(usuario);
 
-            _webOkClassContext.SaveChanges();
+                _webOkClassContext.SaveChanges();
+            }
+
+            return View("Cadastro");
         }
 
         public IActionResult Cadastro()

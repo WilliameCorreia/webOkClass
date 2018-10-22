@@ -1,11 +1,7 @@
-div #simbolo{
-	width: 50px;margin-left: 10px;
+div #simb-nav {
+    width: 50px;
+    margin-left: 10px;
 }
-
-div #lista{
-	margin-left: 75%;
-}
-
 footer #rodap{
 	bottom: 0;width: 100%; position: fixed;
 }
