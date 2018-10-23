@@ -21,16 +21,16 @@ namespace webOkClass.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public IActionResult PaginaPrincipal(string Email, string Senha)
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(Login login)
         {
             if (ModelState.IsValid)
             {
                 string CfSenha = null;
                 Usuario Dbusuario = null;
 
-                IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == Email select dados;
+                IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == login.Email select dados;
 
                 foreach (Usuario dados in DbObjeto)
                 {
@@ -38,42 +38,41 @@ namespace webOkClass.Controllers
                     CfSenha = dados.Senha;
                 }
 
-                if (CfSenha == Senha)
+                if (CfSenha == login.Senha)
                 {
-                    return View(Dbusuario);
+                    return View("PaginaPrincipal",Dbusuario);
                 }
                 else
                 {
+                    string msg = "Usuario ou senha inválido";
                     return View("Index");
                 }
             }
-            return View("Index");       
-           
-        }
-
-
-        [HttpPost]
-        public IActionResult AddUsuario(Usuario usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                _webOkClassContext.Add(usuario);
-
-                _webOkClassContext.SaveChanges();
-            }
-
-            return View("Cadastro");
-        }
+            return View(login);
+        }      
+       
 
         public IActionResult Cadastro()
         {
             return View();
         }
 
-        public IActionResult RecuperarSenha()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Cadastro(Usuario usuario)
         {
-            return View();
-        }
+            if (ModelState.IsValid)
+            {
+                _webOkClassContext.Add(usuario);
 
+                _webOkClassContext.SaveChanges();
+
+                return View();
+            }
+            else
+            {
+                return View(usuario);
+            }
+        }
     }
 }

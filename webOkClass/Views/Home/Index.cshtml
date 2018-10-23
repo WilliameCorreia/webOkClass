@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model webOkClass.Models.Login
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <!-- Required meta tags -->
@@ -38,24 +39,29 @@
                         <img id="simbolo" src="images/icons/simbolo.png" alt=simbolo>                        
                     </div>
                     <div class="panel-body">
-                        @using (Html.BeginForm("PaginaPrincipal", "Home", new { @class = "form-horizontal" }))
+                        @using (Html.BeginForm("Index", "Home", new { @class = "form-horizontal" }))
                         {
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Usuario</label>
                                 <input name="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Informe Email  ou  Id de Matrícula" required>
                             </div>
-
+                            <div class="mensagem">
+                                @Html.ValidationMessageFor(login => login.Email, "", new { @class = "text-danger" })
+                            </div>                            
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Senha</label>
                                 <input name="Senha" type="password" class="form-control" id="exampleInputPassword1" placeholder="Sua senha de cadastro" required>
                             </div>
-
+                            <div class="mensagem">
+                                @Html.ValidationMessageFor(login => login.Senha, "", new { @class = "text-danger" })
+                            </div>                            
                             <div class="form-group">
                                 <label><input type="checkbox">Lembre-me</label>
                             </div>
 
                             <div class="form-group">
-                                <button id="Acessar" type="submit" class="btn btn-primary btn-block">Acessar</button>                             
+                                <button id="Acessar" type="submit" class="btn btn-primary btn-block">Acessar</button>
                             </div>
 
                             <div class="text-center">

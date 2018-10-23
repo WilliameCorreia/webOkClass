@@ -9,7 +9,7 @@ using webOkClass.DataContext;
 namespace webOkClass.Migrations
 {
     [DbContext(typeof(WebOkClassContext))]
-    [Migration("20181021174043_initial")]
+    [Migration("20181023182316_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,25 +26,33 @@ namespace webOkClass.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Campus");
+                    b.Property<int>("Campus");
 
                     b.Property<string>("Cpf");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
                     b.Property<string>("Endereço");
 
-                    b.Property<string>("Matricula");
+                    b.Property<string>("Matricula")
+                        .IsRequired()
+                        .HasMaxLength(10);
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(10);
 
-                    b.Property<string>("Senha");
+                    b.Property<string>("Senha")
+                        .HasMaxLength(10);
 
-                    b.Property<string>("Sobrenome");
+                    b.Property<string>("Sobrenome")
+                        .IsRequired()
+                        .HasMaxLength(10);
 
                     b.Property<string>("Telefone");
 
-                    b.Property<string>("TipoFuncionario");
+                    b.Property<int>("TipoFuncionario");
 
                     b.HasKey("UsuarioId");
 

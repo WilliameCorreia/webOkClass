@@ -1,6 +1,6 @@
 
 /*ESTILO DO INDEX.HTML*/
-body {
+body, html {
     background: url('../images/imgBackground.jpg');
     background-repeat: round;
     height: 100%;
@@ -33,9 +33,13 @@ form.form-horizontal {
     margin-left: 50px;
 }
 
- a.cadastro{
- 	color: #4ad440;
- }
+.mensagem{
+    text-align: center;
+}
+
+a.cadastro {
+    color: #4ad440;
+}
 
  footer #rodape, h6{
 	height: 20%;margin-left: 1%;
