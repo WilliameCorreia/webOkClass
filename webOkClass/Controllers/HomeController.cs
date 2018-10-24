@@ -40,11 +40,11 @@ namespace webOkClass.Controllers
 
                 if (CfSenha == login.Senha)
                 {
-                    return View("PaginaPrincipal",Dbusuario);
+                    return View("PaginaPrincipal", Dbusuario);
                 }
                 else
                 {
-                    string msg = "Usuario ou senha inválido";
+                    //string msg = "Usuario ou senha inválido";
                     return View("Index");
                 }
             }
@@ -73,6 +73,27 @@ namespace webOkClass.Controllers
             {
                 return View(usuario);
             }
+      
+        }
+
+        public IActionResult PaginaPrincipal()
+        {
+            return View();
+        }
+
+        public IActionResult Painel()
+        {
+            return View();
+        }
+
+        public IActionResult PerfilUsuario()
+        {
+            return View();
+        }
+
+        public IActionResult Historico()
+        {
+            return View();
         }
     }
 }
