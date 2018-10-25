@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webOkClass.DataContext;
 
 namespace webOkClass.Migrations
 {
     [DbContext(typeof(WebOkClassContext))]
-    partial class WebOkClassContextModelSnapshot : ModelSnapshot
+    [Migration("20181024232639_Class_Salas")]
+    partial class Class_Salas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

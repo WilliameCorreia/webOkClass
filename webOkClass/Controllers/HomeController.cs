@@ -78,7 +78,9 @@ namespace webOkClass.Controllers
 
         public IActionResult PaginaPrincipal()
         {
-            return View();
+            IEnumerable<SalaDeAula> DbSalas = from sala in _webOkClassContext.Salas select sala;
+
+            return View(DbSalas);
         }
 
         public IActionResult Painel()
