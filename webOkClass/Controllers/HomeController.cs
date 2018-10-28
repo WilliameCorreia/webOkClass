@@ -40,7 +40,8 @@ namespace webOkClass.Controllers
 
                 if (CfSenha == login.Senha)
                 {
-                    return View("PaginaPrincipal", Dbusuario);
+                    return RedirectToAction("_PaginaPrincipal", "Salas");
+                    //return View("PaginaPrincipal", Dbusuario);
                 }
                 else
                 {
@@ -51,7 +52,7 @@ namespace webOkClass.Controllers
             return View(login);
         }      
        
-
+       
         public IActionResult Cadastro()
         {
             return View();
@@ -73,29 +74,8 @@ namespace webOkClass.Controllers
             {
                 return View(usuario);
             }
-      
+
         }
 
-        public IActionResult PaginaPrincipal()
-        {
-            IEnumerable<SalaDeAula> DbSalas = from sala in _webOkClassContext.Salas select sala;
-
-            return View(DbSalas);
-        }
-
-        public IActionResult Painel()
-        {
-            return View();
-        }
-
-        public IActionResult PerfilUsuario()
-        {
-            return View();
-        }
-
-        public IActionResult Historico()
-        {
-            return View();
-        }
     }
 }

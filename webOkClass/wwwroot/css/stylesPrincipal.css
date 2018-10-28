@@ -1,10 +1,20 @@
-div #simb-nav {
+.Limpa{
+    background-image:url(~/images/icons/simbolo.png);
     width: 50px;
-    margin-left: 10px;
+    height: 50px;
 }
-footer #rodap{
-	bottom: 0;width: 100%; position: fixed;
+img{
+    width: 50px;
 }
-div #rodape{
-	color: white;
+.cor1 {
+    border: 2px solid red!important;
+}
+.cor2 {
+    border: 2px solid yellow!important;
+}
+.cor3 {
+    border: 2px solid #0ef30e!important;
+}
+.cor4 {
+    border: 2px solid black!important;
 }

@@ -3,41 +3,4 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-
-<!-- End Navbar -->
-<div class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 style="color: #3ebbec; font-size: 16px" class="title"> FAMETRO - GUILHERME ROCHA </h5>
-                    <P>Catálogo de Salas - [Escolha abaixo na qual deseja utilizar]</P>
-                </div>
-
-                <div class="card-body all-icons">
-                    <div class="row">
-                        @for (int i = 1; i <= 18; i++)
-                        {
-                            <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
-                                        <i class="tim-icons icon-settings-gear-63"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#pablo">Entrar nesta Sala</a>
-                                        <a class="dropdown-item" href="#pablo">Fechar esta Sala</a>
-                                        <a class="dropdown-item" href="#pablo">Reservar esta Sala</a>
-                                    </div>
-                                </div>
-                                <div class="font-icon-detail">
-                                    <i class="tim-icons icon-app"></i>
-                                    <P><H2>SALA @i</H2></P>
-                                </div>
-                            </div>
-                        }                     
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("_Salas")

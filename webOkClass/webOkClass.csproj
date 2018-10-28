@@ -5,10 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\PaginaPrincipal.cshtml" />
+    <Content Remove="Views\Home\_Salas.cshtml" />
     <Content Remove="Views\_ViewImports.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="angularjs" Version="1.7.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
