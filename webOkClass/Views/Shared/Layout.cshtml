@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SalaDeAula>
+﻿@model webOkClass.Models.Usuario
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -21,11 +21,10 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/assets/demo/demo.css" rel="stylesheet" />
     <script src="~/Distro/AngulaJs/angular.js"></script>
-    <script src="~/Js/MeuApp.js"></script>
 </head>
 
 <body class="" ng-app="MeuApp">
-    <div class="wrapper" ng-controller="MeuAppCtrl">
+    <div class="wrapper">
         <div class="sidebar">
             <!--
                 Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
@@ -41,25 +40,25 @@
                 </div>
                 <ul class="nav">
                     <li class="active ">
-                        <a href="@Url.Action("_PaginaPrincipal","Salas")">
+                        <a href="@Url.Action("_PaginaPrincipal","Home")">
                             <i class="tim-icons icon-app"></i>
                             <p style="font-size: 16px;">Salas</p>
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Painel","Salas")">
+                        <a href="@Url.Action("Painel","Home")">
                             <i class="tim-icons icon-chart-pie-36"></i>
                             <p style="font-size: 16px;">Painel</p>
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("PerfilUsuario","Salas")">
+                        <a href="@Url.Action("PerfilUsuario","Home")">
                             <i class="tim-icons icon-single-02"></i>
                             <p style="font-size: 16px;">Perfil de Usuário</p>
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Historico","Salas")">
+                        <a href="@Url.Action("Historico","Home")">
                             <i class="tim-icons icon-notes"></i>
                             <p style="font-size: 16px;">Histórico</p>
                         </a>
@@ -79,7 +78,7 @@
                                 <span class="navbar-toggler-bar bar3"></span>
                             </button>
                         </div>
-                        <a class="navbar-brand" href="javascript:void(0)">Salas</a>
+                        <a class="navbar-brand" href="#">Salas</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -88,10 +87,9 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navigation">
                         <ul class="navbar-nav ml-auto">
+                            @*<li>@Model.Email</li>*@
                             <li class="search-bar input-group">
-                                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
-                                    @*<p>@Model.Email</p>*@
-                                </button>
+                                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"></button>
                             </li>
                             <li class="search-bar input-group">
                                 <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
@@ -210,9 +208,6 @@
     <script src="~/assets/js/core/popper.min.js"></script>
     <script src="~/assets/js/core/bootstrap.min.js"></script>
     <script src="~/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!--  Google Maps Plugin    -->
-    <!-- Place this tag in your head or just before your close body tag. -->
-    @*<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>*@
     <!-- Chart JS -->
     <script src="~/assets/js/plugins/chartjs.min.js"></script>
     <!--  Notifications Plugin    -->
@@ -223,6 +218,7 @@
     <script src="~/assets/demo/demo.js"></script>
     <script src="~/Js/ScriptLayout.js"></script>
     <script src="~/Js/ScriptPaginaPrincipal.js"></script>
+    <script src="~/Js/MeuApp.js"></script>
 </body>
 
 </html>

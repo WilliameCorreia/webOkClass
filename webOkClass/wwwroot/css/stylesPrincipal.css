@@ -7,14 +7,24 @@ img{
     width: 50px;
 }
 .cor1 {
-    border: 2px solid red!important;
+    border: 2px solid red !important;
 }
-.cor2 {
-    border: 2px solid yellow!important;
+.cor2 {   
+    border: 2px solid #0ef30e !important;
 }
 .cor3 {
-    border: 2px solid #0ef30e!important;
+    border: 2px solid yellow !important;
 }
 .cor4 {
     border: 2px solid black!important;
+}
+.buttonSala {
+    display: grid;
+}
+.font-icon-detail{
+    padding-top: 10px!important;
+    padding-bottom: 0px!important;
+}
+select{
+    width: 100%;
 }

@@ -39,9 +39,8 @@
                         <img id="simbolo" src="images/icons/simbolo.png" alt=simbolo>                        
                     </div>
                     <div class="panel-body">
-                        @using (Html.BeginForm("Index", "Home", new { @class = "form-horizontal" }))
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
                         {
-
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Usuario</label>
                                 <input name="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Informe Email  ou  Id de Matrícula" required>
@@ -78,10 +77,7 @@
     </div>
     <nav>
         <div class="container">
-
-            <div class="col-sm-4">
-                
-               
+            <div class="col-sm-4">                           
             </div>
         </div>
     </nav>

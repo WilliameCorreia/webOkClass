@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "_PaginaPrincipal";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@model webOkClass.Models.Usuario
+
+<!-- End Navbar -->
+<div class="content" ng-controller="MeuAppCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 style="color: #3ebbec; font-size: 16px" class="title"> FAMETRO - GUILHERME ROCHA @DateTime.Now.ToString("HH:mm:ss")</h5>
+                    <P>Catálogo de Salas - [Escolha abaixo na qual deseja utilizar]</P>
+                </div>
+                <p id="login">@Model.Email</p>
+                <div class="card-body all-icons">
+                    <div class="row">                       
+                        <div ng-repeat="sala in mydata" id="{{sala.salaDeAulaId}}" class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+                            
+                            <div class="font-icon-detail  {{'cor' + sala.statusDaSala}}">                               
+
+                                <img src="~/images/icons/81419d8a9c.png" />
+                                <P><H2>SALA {{sala.numeroDaSala}}</H2></P>
+                                <div class="buttonSala">
+                                    <select class="btn-dark" ng-model="status.selecionado">
+                                        <option value="">Opções da sala</option>
+                                        <option value="1">Entrar nesta Sala</option>
+                                        <option value="2">Fechar esta Sala</option>
+                                        <option value="3">Reservar esta Sala</option>
+                                        <option value="4">Limpar Sala</option>
+                                    </select>
+                                    <button id="{{sala.salaDeAulaId}}" class="btn btn-dark" ng-click="statusSala(status)">ok</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -5,9 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\SalasController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Home\PaginaPrincipal.cshtml" />
     <Content Remove="Views\Home\_Salas.cshtml" />
     <Content Remove="Views\_ViewImports.cshtml" />
+    <Content Remove="wwwroot\Js\ScriptPaginaPrincipal.js" />
   </ItemGroup>
 
   <ItemGroup>

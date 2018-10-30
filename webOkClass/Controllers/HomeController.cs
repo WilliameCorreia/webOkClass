@@ -15,6 +15,8 @@ namespace webOkClass.Controllers
             _webOkClassContext = webOkClassContext;
         }
 
+        Usuario UsuarioLogin = new Usuario();
+       
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -25,34 +27,42 @@ namespace webOkClass.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(Login login)
         {
+            if (ValidacaoLogin(login))
+            {
+                return RedirectToAction("_PaginaPrincipal", UsuarioLogin);
+            }
+            else
+            {
+                return View(login);
+            }
+            
+        }
+
+        //autenticação de usuário
+        public bool ValidacaoLogin(Login login)
+        {
             if (ModelState.IsValid)
             {
-                string CfSenha = null;
-                Usuario Dbusuario = null;
-
                 IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == login.Email select dados;
 
-                foreach (Usuario dados in DbObjeto)
-                {
-                    Dbusuario = dados;
-                    CfSenha = dados.Senha;
-                }
+                UsuarioLogin = DbObjeto.First();
 
-                if (CfSenha == login.Senha)
+                if (UsuarioLogin.Senha == login.Senha)
                 {
-                    return RedirectToAction("_PaginaPrincipal", "Salas");
-                    //return View("PaginaPrincipal", Dbusuario);
+                    return true;
                 }
                 else
                 {
-                    //string msg = "Usuario ou senha inválido";
-                    return View("Index");
+                    return false;
                 }
             }
-            return View(login);
-        }      
-       
-       
+            else
+            {
+                return false;
+            }
+        }
+
+
         public IActionResult Cadastro()
         {
             return View();
@@ -75,6 +85,65 @@ namespace webOkClass.Controllers
                 return View(usuario);
             }
 
+        }
+
+        [HttpGet]
+        public JsonResult Dbsalas()
+        {
+            IEnumerable<SalaDeAula> DbSalas = from sala in _webOkClassContext.Salas select sala;
+
+            var db = DbSalas.ToList();
+
+            return Json(DbSalas);
+        }
+
+        [HttpPost]
+        public void UpdateSala(int valor, int id)
+        {
+            if (valor != 0 && id != 0)
+            {
+                SalaDeAula sala = new SalaDeAula();
+
+                sala = _webOkClassContext.Salas.Find(id);
+
+                sala.StatusDaSala = valor;
+
+                _webOkClassContext.SaveChanges();
+            }
+            else
+            {              
+                       
+            }
+
+
+        }
+
+        public IActionResult _PaginaPrincipal(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(usuario);
+            }
+            else
+            {
+                return RedirectToAction("Index",usuario);
+            }
+           
+        }
+
+        public IActionResult Painel()
+        {
+            return View("Painel");
+        }
+
+        public IActionResult PerfilUsuario()
+        {
+            return View();
+        }
+
+        public IActionResult Historico()
+        {
+            return View();
         }
 
     }

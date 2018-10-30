@@ -11,6 +11,5 @@ namespace webOkClass.Models
         public int NumeroDaSala { get; set; }
         public int TipoDeSala { get; set; }
         public int StatusDaSala { get; set; }
-        public int ReservaDaSala { get; set; }
     }
 }
