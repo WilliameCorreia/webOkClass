@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webOkClass.DataContext;
 
 namespace webOkClass.Migrations
 {
     [DbContext(typeof(WebOkClassContext))]
-    partial class WebOkClassContextModelSnapshot : ModelSnapshot
+    [Migration("20181101194611_alteracaotabelas")]
+    partial class alteracaotabelas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,8 +45,12 @@ namespace webOkClass.Migrations
 
                     b.Property<int>("Campus");
 
+                    b.Property<string>("Cpf");
+
                     b.Property<string>("Email")
                         .IsRequired();
+
+                    b.Property<string>("Endereço");
 
                     b.Property<string>("Matricula")
                         .IsRequired()
@@ -62,6 +68,8 @@ namespace webOkClass.Migrations
                         .HasMaxLength(10);
 
                     b.Property<int>("Status");
+
+                    b.Property<string>("Telefone");
 
                     b.Property<int>("TipoFuncionario");
 

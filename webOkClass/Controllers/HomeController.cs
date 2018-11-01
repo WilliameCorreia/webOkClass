@@ -118,22 +118,36 @@ namespace webOkClass.Controllers
 
         }
 
-        public IActionResult _PaginaPrincipal(Usuario usuario)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult _PaginaPrincipal(Login login)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && ValidacaoLogin(login))
             {
-                return View(usuario);
+                return View(login);
             }
             else
             {
-                return RedirectToAction("Index",usuario);
+                return RedirectToAction("Index");
             }
            
         }
 
-        public IActionResult Painel()
+        public IActionResult _PaginaPrincipal()
         {
-            return View("Painel");
+            return View();
+        }
+
+
+        public IActionResult _Main()
+        {
+            return PartialView();
+        }
+
+        [HttpGet]
+        public IActionResult Painel(Login login)
+        {
+            return View();
         }
 
         public IActionResult PerfilUsuario()

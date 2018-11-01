@@ -86,14 +86,7 @@
             <div class="col-sm-3">
                 <label for="exampleInputPassword1">Confirmar Senha</label>
                 <input name="ConfirmarSenha" type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
-            </div>
-            <div class="col-sm-3">
-                <label for="validationCustom03">CPF</label>
-                <input name="Cpf" type="text" class="form-control" id="validationCustom03" placeholder="CPF" required>
-                <div class="invalid-feedback">
-                    Por favor, forneça seu CPF válido.
-                </div>
-            </div>
+            </div>           
         </div>
         <div class="form-row">
             <div class="col-sm-4">
@@ -103,21 +96,7 @@
                     <option value=1>  Fametro - Conselheiro Estelita</option>
                     <option value=2>  Fametro - Guilherme Rocha</option>
                 </select>
-            </div>
-            <div class="col-sm-4">
-                <div class="col-0 md-6 mb-3">
-                    <label for="validationCustom06">Celular</label>
-                    <input name="Telefone" type="text" class="form-control" id="validationCustom06" placeholder="Nº Celular" required>
-                    <div class="invalid-feedback">
-                        Por favor, forneça um numero válido.
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <label for="validationCustom05">Endereço</label>
-                <input name="Endereço" type="text" class="form-control" id="validationCustom05" placeholder="Ex: Rua, Nº, Bairro, Cidade e Estado" required>
-                @Html.ValidationMessageFor(usuario => usuario.Endereço, "", new { @class = "text-danger" })
-            </div>
+            </div>                     
         </div>
         <div class="form-row">
             <div class="col-sm-4">

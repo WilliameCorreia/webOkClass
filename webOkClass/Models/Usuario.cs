@@ -22,18 +22,19 @@ namespace webOkClass.Models
         [StringLength(10, MinimumLength = 6, ErrorMessage = "A sobrenome deve ter entre 6 e 10 caracteres")]
         public string Sobrenome { get; set; }
 
-        
-        public string Cpf { get; set; }
-
-        [DataType(DataType.PhoneNumber)]
-        public string Telefone { get; set; }
-
-        public string Endereço { get; set; }
-
         [Required]
         public int Campus { get; set; }
 
         [Required]
         public int TipoFuncionario { get; set; }
+
+        public ContactStatus Status { get; set; }
+    }
+
+    public enum ContactStatus
+    {
+        Submitted,
+        Approved,
+        Rejected
     }
 }

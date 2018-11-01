@@ -28,3 +28,22 @@ img{
 select{
     width: 100%;
 }
+.title {
+    display: -webkit-inline-box;
+    margin-right: 30%;
+}
+.filtro {
+    display: -webkit-inline-box;
+    float: right;
+    margin-left: 10%;
+    margin-right: 5%;
+}
+.filtro label {
+        display: block;
+        margin-bottom: 0px;
+        margin-top: 2px;
+        margin-right: 10px;
+}
+.card-header div {
+    display: -webkit-inline-box;
+}

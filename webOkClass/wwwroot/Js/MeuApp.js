@@ -1,6 +1,10 @@
-﻿angular.module("MeuApp", []);
+﻿/// <reference path="../distro/angulajs/angular.js" />
 
-angular.module("MeuApp").controller("MeuAppCtrl", function ($scope, $http) {
+// criação do modulo
+var app = angular.module("MeuApp", []);
+
+// criação do controller
+app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
 
     //Carrega a lista e status das salas do banco de dados
     var CarregarSalas = function () {
@@ -29,10 +33,15 @@ angular.module("MeuApp").controller("MeuAppCtrl", function ($scope, $http) {
 
     };
 
-    //$scope.PartialView = function () {
-    //    $("#PartialView").load("http://localhost:64944/Home/_PaginaPrincipal");
-    //};
-         
+    //atualização automaticas das informações com o banco de dados 
+    $interval(function () {
+        CarregarSalas();
+    }, 30000);
 
+    // varialvel de inicilização do filtro das salas
+    $scope.filtro = "";
+    $scope.valor = "1";
+
+    //chamada da função
     CarregarSalas();
 });
