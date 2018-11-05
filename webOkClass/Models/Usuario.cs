@@ -15,11 +15,11 @@ namespace webOkClass.Models
         public string Matricula { get; set; }
 
         [Required]
-        [StringLength(10, MinimumLength = 6, ErrorMessage = "A nome deve ter entre 6 e 10 caracteres")]
+        [StringLength(10, MinimumLength = 4, ErrorMessage = "A nome deve ter entre 6 e 10 caracteres")]
         public string Nome { get; set; }
 
         [Required]
-        [StringLength(10, MinimumLength = 6, ErrorMessage = "A sobrenome deve ter entre 6 e 10 caracteres")]
+        [StringLength(10, MinimumLength = 4, ErrorMessage = "A sobrenome deve ter entre 6 e 10 caracteres")]
         public string Sobrenome { get; set; }
 
         [Required]

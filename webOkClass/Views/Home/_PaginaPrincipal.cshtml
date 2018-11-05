@@ -10,7 +10,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 style="color: #3ebbec; font-size: 16px" class="title"> FAMETRO - GUILHERME ROCHA @DateTime.Now.ToString("HH:mm:ss")</h5>
+                    <h5 style="color: #3ebbec; font-size: 16px" class="title"> FAMETRO - GUILHERME ROCHA @DateTime.Now.ToString("HH:mm:ss") </h5>
+                    {{Usuario.tipoFuncionario}}
                     <div class="filtro">
                         <label>PESQUISAR</label>
                         <select ng-model="filtro" class="btn-dark">
@@ -36,10 +37,10 @@
                                 <div class="buttonSala">
                                     <select class="btn-dark" ng-model="status.selecionado">
                                         <option value="">Selecione</option>
-                                        <option value="1">Entrar nesta Sala</option>
-                                        <option value="2">liberar Sala</option>
-                                        <option value="3">Reservar esta Sala</option>
-                                        <option value="4">Limpar Sala</option>
+                                        <option data-ng-if="Usuario.tipoFuncionario == 1" value="1">Entrar nesta Sala</option>
+                                        <option data-ng-if="Usuario.tipoFuncionario == 1 || Usuario.tipoFuncionario == 2" value="2">Liberar Sala</option>
+                                        <option data-ng-if="Usuario.tipoFuncionario == 1" value="3">Reservar esta Sala</option>
+                                        <option data-ng-if="Usuario.tipoFuncionario == 2" value="4">Limpar Sala</option>
                                     </select>
                                     <button id="{{sala.salaDeAulaId}}" class="btn btn-dark" ng-click="statusSala(status)">ok</button>
                                 </div>

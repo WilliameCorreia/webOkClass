@@ -8,16 +8,19 @@ namespace webOkClass.Models
 {
     public class Login
     {
-        [Required]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Login deve estar no formato de Email válido")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Informe um Email Válido")]
+        [EmailAddress(ErrorMessage = "Informe uma Email Válido")]
+        public string Email { get; set; }    
+        
+        public string Token { get; set; }
 
-        [DataType(DataType.Password)]
-        [StringLength(10, MinimumLength = 6, ErrorMessage = "A senha deve ter entre 6 e 10 caracteres")]
-        public string Senha { get; set; }
+        [Required(ErrorMessage = "Informe uma Senha Válida")]
+        [StringLength(15,MinimumLength = 6, ErrorMessage = "A senha deve ter no Mímimo 6 Caracteres")]
+        public string Password { get; set; }
 
-        //[DataType(DataType.Password)]
-        //[Compare("Senha", ErrorMessage ="As senhas são diferentes")]
-        //public string ConfirmarSenha { get; set; }
+        public string PasswordHash { get; set; }
+
+        public DateTime CreateDate { get; set; }
+        
     }
 }

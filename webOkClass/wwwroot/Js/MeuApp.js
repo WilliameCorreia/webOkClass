@@ -8,7 +8,7 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
 
     //Carrega a lista e status das salas do banco de dados
     var CarregarSalas = function () {
-        $http.get("http://localhost:64944/Home/Dbsalas").then(function (response) {
+        $http.get("/Home/Dbsalas").then(function (response) {
             $scope.mydata = response.data;
             console.log($scope.mydata);
         });
@@ -25,7 +25,7 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
 
         $http({
             method: 'POST',
-            url: 'http://localhost:64944/Home/UpdateSala',
+            url: '/Home/UpdateSala',
             params: { 'id': id, 'valor': valor }
         }).then(function (data, status, headers, config) {
             CarregarSalas();
@@ -40,7 +40,23 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
 
     // varialvel de inicilização do filtro das salas
     $scope.filtro = "";
-    $scope.valor = "1";
+
+    var valor = document.getElementById("teste").innerHTML;
+
+    //$scope.Usuario = ""; 
+    
+    CarregarUsuario = function(){
+        $http({
+            method: 'POST',
+            url: '/Home/CarregarUsuario',
+            params: { 'email': valor }
+        }).then(function (data, status, headers, config) {
+            $scope.Usuario = data.data;
+            console.log(data.data);
+        });
+    };
+
+    CarregarUsuario();
 
     //chamada da função
     CarregarSalas();

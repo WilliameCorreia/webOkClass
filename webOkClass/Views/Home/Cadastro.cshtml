@@ -73,15 +73,13 @@
                         <span class="input-group-text" id="inputGroupPrepend">#COD</span>
                     </div>
                     <input name="Matricula" type="text" class="form-control" id="validationCustomUsername" placeholder="Numero de Id-Matrícula" aria-describedby="inputGroupPrepend" required>
-                    <div class="invalid-feedback">
-                        Por favor, descreva seu nome de usuário.
-                    </div>
+                    @Html.ValidationMessageFor(usuario => usuario.Matricula, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-sm-3">
                 <label for="exampleInputPassword1">Senha</label>
-                <input name="Senha" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                @*@Html.ValidationMessageFor(usuario => usuario.ConfirmarSenha, "", new { @class = "text-danger" })*@
+                <input name="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                @Html.ValidationMessageFor(usuario => usuario.Password, "", new { @class = "text-danger" })
             </div>
             <div class="col-sm-3">
                 <label for="exampleInputPassword1">Confirmar Senha</label>
@@ -110,15 +108,9 @@
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="TipoFuncionario" id="exampleRadios2" value=2 required>
                     <label class="form-check-label" for="exampleRadios2">
-                        Monitor-Chave
+                        Monitor-Limpeza
                     </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="TipoFuncionario" id="exampleRadios3" value=3 required>
-                    <label class="form-check-label" for="exampleRadios3">
-                        Limpeza
-                    </label>
-                </div>
+                </div>                
             </div>
         </div>
         <div class="form-row">

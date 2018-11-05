@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webOkClass.DataContext;
 
 namespace webOkClass.Migrations
 {
     [DbContext(typeof(WebOkClassContext))]
-    partial class WebOkClassContextModelSnapshot : ModelSnapshot
+    [Migration("20181104203310_add-campos_validacao")]
+    partial class addcampos_validacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

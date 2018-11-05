@@ -1,4 +1,6 @@
-﻿@model webOkClass.Models.Login
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model webOkClass.Models.Login
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -39,7 +41,8 @@
                         <img id="simbolo" src="images/icons/simbolo.png" alt=simbolo>                        
                     </div>
                     <div class="panel-body">
-                        @using (Html.BeginForm("_PaginaPrincipal", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+                                               
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
                         {
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Usuario</label>
@@ -47,14 +50,14 @@
                             </div>
                             <div class="mensagem">
                                 @Html.ValidationMessageFor(login => login.Email, "", new { @class = "text-danger" })
-                            </div>                            
+                            </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Senha</label>
-                                <input name="Senha" type="password" class="form-control" id="exampleInputPassword1" placeholder="Sua senha de cadastro" required>
+                                <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Sua senha de cadastro" required>
                             </div>
                             <div class="mensagem">
-                                @Html.ValidationMessageFor(login => login.Senha, "", new { @class = "text-danger" })
-                            </div>                            
+                                @Html.ValidationMessageFor(login => login.Password, "", new { @class = "text-danger" })
+                            </div>
                             <div class="form-group">
                                 <label><input type="checkbox">Lembre-me</label>
                             </div>

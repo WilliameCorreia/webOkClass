@@ -3,33 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using webOkClass.DataContext;
 using webOkClass.Models;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace webOkClass.Controllers
 {
     public class HomeController : Controller
-    {       
-        public readonly WebOkClassContext _webOkClassContext;
+    {
+        //instanciando uma classe de serviço por injeção
+        public readonly WebOkClassContext _webOkClassContext;      
 
-        public HomeController(WebOkClassContext webOkClassContext)
+        public string Message { get; private set; } = string.Empty;
+
+        //instanciando uma classe de serviço por injeção
+        private IUserService _userService;
+
+        public HomeController(IUserService userService, WebOkClassContext webOkClassContext)
         {
+            _userService = userService;
             _webOkClassContext = webOkClassContext;
         }
 
-        Usuario UsuarioLogin = new Usuario();
-       
+        //fazendo bind da model para ser usada no front-end
+        [BindProperty]
+        public Login login { get; set; }
+
+        Login LoginUsuario = new Login();
+
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
-
+       
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Index(Login login)
         {
-            if (ValidacaoLogin(login))
+            //verifica se o usuário está autenticado
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("_PaginaPrincipal", UsuarioLogin);
+                return AutenticacaoUsuario();
             }
             else
             {
@@ -38,47 +54,132 @@ namespace webOkClass.Controllers
             
         }
 
-        //autenticação de usuário
-        public bool ValidacaoLogin(Login login)
+        public IActionResult _PaginaPrincipal()
         {
-            if (ModelState.IsValid)
+            //verifica se o usuário está autenticado
+            if (User.Identity.IsAuthenticated)
             {
-                IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == login.Email select dados;
+                var Email = User.Claims.ToList();
 
-                UsuarioLogin = DbObjeto.First();
+                LoginUsuario.Email = Email[0].Value;
 
-                if (UsuarioLogin.Senha == login.Senha)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return View(LoginUsuario);
+
             }
             else
             {
-                return false;
+                return RedirectToAction("Index");
+            }            
+        }
+
+        public IActionResult Painel()
+        {
+            //verifica se o usuário está autenticado
+            if (User.Identity.IsAuthenticated)
+            {
+                var Email = User.Claims.ToList();
+
+                LoginUsuario.Email = Email[0].Value;
+
+                return View(LoginUsuario);
+
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }   
+        }
+
+        public IActionResult PerfilUsuario()
+        {
+            //verifica se o usuário está autenticado
+            if (User.Identity.IsAuthenticated)
+            {
+                var Email = User.Claims.ToList();
+
+                LoginUsuario.Email = Email[0].Value;
+
+                return View(LoginUsuario);
+
+            }
+            else
+            {
+                return RedirectToAction("Index");
             }
         }
 
+        public IActionResult Historico()
+        {
+            //verifica se o usuário está autenticado
+            if (User.Identity.IsAuthenticated)
+            {
+                var Email = User.Claims.ToList();
+
+                LoginUsuario.Email = Email[0].Value;
+
+                return View(LoginUsuario);
+
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
         public IActionResult Cadastro()
         {
             return View();
         }
 
+        //metodo post do formulario
+        public IActionResult AutenticacaoUsuario()
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            //faz a busca do usuário e verifica se existe
+            var user = _userService.Authenticate(login.Email, login.Password);
+
+            LoginUsuario = user;
+
+            if (user == null)
+                return Unauthorized();
+
+            //declara claim de identidade
+            var claim = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Token.ToString())
+                });
+
+            var claims = new[]
+            {
+                 new Claim(ClaimTypes.Email, user.Email.ToString())
+            }.ToAsyncEnumerable().ToEnumerable();
+
+
+            //faz autenticação via Cookie
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(identity));
+
+            return RedirectToAction("_PaginaPrincipal",LoginUsuario);
+        }
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Cadastro(Usuario usuario)
         {
+            usuario.Token = "token";
+
             if (ModelState.IsValid)
             {
                 _webOkClassContext.Add(usuario);
 
                 _webOkClassContext.SaveChanges();
 
-                return View();
+                return AutenticacaoUsuario();
             }
             else
             {
@@ -111,53 +212,20 @@ namespace webOkClass.Controllers
                 _webOkClassContext.SaveChanges();
             }
             else
-            {              
-                       
-            }
-
-
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult _PaginaPrincipal(Login login)
-        {
-            if (ModelState.IsValid && ValidacaoLogin(login))
             {
-                return View(login);
+
             }
-            else
-            {
-                return RedirectToAction("Index");
-            }
-           
-        }
 
-        public IActionResult _PaginaPrincipal()
+
+        }       
+       
+        public JsonResult CarregarUsuario(string email)
         {
-            return View();
-        }
+            IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == email select dados;
 
+            LoginUsuario = DbObjeto.First();
 
-        public IActionResult _Main()
-        {
-            return PartialView();
-        }
-
-        [HttpGet]
-        public IActionResult Painel(Login login)
-        {
-            return View();
-        }
-
-        public IActionResult PerfilUsuario()
-        {
-            return View();
-        }
-
-        public IActionResult Historico()
-        {
-            return View();
+            return Json(LoginUsuario);
         }
 
     }
