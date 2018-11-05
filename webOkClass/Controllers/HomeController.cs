@@ -45,7 +45,15 @@ namespace webOkClass.Controllers
             //verifica se o usuário está autenticado
             if (ModelState.IsValid)
             {
-                return AutenticacaoUsuario();
+                if(AutenticacaoUsuario() == null)
+                {
+                    ViewBag.mensagem = "usuario não cadastrado";
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("_PaginaPrincipal");
+                }                
             }
             else
             {
@@ -145,7 +153,7 @@ namespace webOkClass.Controllers
             LoginUsuario = user;
 
             if (user == null)
-                return Unauthorized();
+                return null;
 
             //declara claim de identidade
             var claim = new ClaimsIdentity(new Claim[]
@@ -173,13 +181,22 @@ namespace webOkClass.Controllers
         {
             usuario.Token = "token";
 
-            if (ModelState.IsValid)
+            usuario.CreateDate = DateTime.Now;
+
+            bool status = _userService.VerificaExiste(usuario);
+
+            if (ModelState.IsValid && status)
             {
                 _webOkClassContext.Add(usuario);
 
                 _webOkClassContext.SaveChanges();
 
                 return AutenticacaoUsuario();
+            }
+            if (!status)
+            {
+                ViewBag.Mensagem = "Usuario Já Cadastrado";
+                return View();
             }
             else
             {

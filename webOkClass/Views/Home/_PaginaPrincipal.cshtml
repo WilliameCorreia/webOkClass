@@ -35,14 +35,14 @@
                                 <img src="~/images/icons/81419d8a9c.png" />
                                 <P><H2>SALA {{sala.numeroDaSala}}</H2></P>
                                 <div class="buttonSala">
-                                    <select class="btn-dark" ng-model="status.selecionado">
+                                    <select ng-disabled="sala.statusDaSala == '3'" class="btn-dark" ng-model="status.selecionado">
                                         <option value="">Selecione</option>
                                         <option data-ng-if="Usuario.tipoFuncionario == 1" value="1">Entrar nesta Sala</option>
                                         <option data-ng-if="Usuario.tipoFuncionario == 1 || Usuario.tipoFuncionario == 2" value="2">Liberar Sala</option>
                                         <option data-ng-if="Usuario.tipoFuncionario == 1" value="3">Reservar esta Sala</option>
                                         <option data-ng-if="Usuario.tipoFuncionario == 2" value="4">Limpar Sala</option>
                                     </select>
-                                    <button id="{{sala.salaDeAulaId}}" class="btn btn-dark" ng-click="statusSala(status)">ok</button>
+                                    <button ng-if="status.selecionado" id="{{sala.salaDeAulaId}}" class="btn btn-dark" ng-click="statusSala(status)">ok</button>
                                 </div>
                             </div>
 

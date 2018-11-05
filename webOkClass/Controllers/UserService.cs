@@ -10,6 +10,7 @@ namespace webOkClass.Controllers
     public interface IUserService
     {
         Login Authenticate(string email, string password);
+        bool VerificaExiste(Usuario usuario);
     }
 
     public class UserService : IUserService
@@ -32,7 +33,11 @@ namespace webOkClass.Controllers
 
             IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == email select dados;
 
-            user = DbObjeto.First();
+            if (DbObjeto.Count() != 0)
+            {
+                user = DbObjeto.First();
+            }
+            
 
             if (user.Email == email && user.Password == password)
             {
@@ -41,6 +46,22 @@ namespace webOkClass.Controllers
 
             return null;
 
+            
+        }
+
+        public bool VerificaExiste(Usuario usuario)
+        {
+            IEnumerable<Usuario> DbUsuario = from Usuario in _webOkClassContext.Usuarios
+                                             where Usuario.Email == usuario.Email || Usuario.Matricula == usuario.Matricula
+                                             select Usuario;
+            if (DbUsuario.Count() != 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
             
         }
     }
