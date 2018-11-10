@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 namespace webOkClass.Controllers
 {
@@ -142,7 +143,7 @@ namespace webOkClass.Controllers
         //metodo post do formulario
         public IActionResult AutenticacaoUsuario()
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || ModelState.Count == 0)
             {
                 return RedirectToAction("Index");
             }
@@ -181,7 +182,7 @@ namespace webOkClass.Controllers
         {
             usuario.Token = "token";
 
-            usuario.CreateDate = DateTime.Now;
+            usuario.CreateDate = DateTime.Now.ToLocalTime();
 
             bool status = _userService.VerificaExiste(usuario);
 
@@ -235,14 +236,43 @@ namespace webOkClass.Controllers
 
 
         }       
+
+        [HttpPost]
+        public void SalaReservar(int valor, int id, int usuario)
+        {
+            ReservaSala reservaSala = new ReservaSala();
+            reservaSala.StatusReserva = 1;
+            reservaSala.SalaDeAulaId = id;
+            reservaSala.UsuarioId = usuario;
+
+            _webOkClassContext.Add(reservaSala);
+            _webOkClassContext.SaveChanges();
+
+            UpdateSala(valor, id);
+
+        }
        
         public JsonResult CarregarUsuario(string email)
         {
-            IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == email select dados;
+            ReservaSala reserva = new ReservaSala();
+            Usuario usuario = new Usuario();
+            
 
-            LoginUsuario = DbObjeto.First();
-
-            return Json(LoginUsuario);
+            IEnumerable<ReservaSala> DbSalas = from salas in _webOkClassContext.reservas.Include(x => x.Usuario).Include(x=>x.SalaDeAula)
+                                               where salas.Usuario.Email == email && salas.StatusReserva == 1 select salas;
+          
+            if (DbSalas.Count() != 0)
+            {
+                reserva = DbSalas.First();
+                return Json(reserva);
+            }
+            else
+            {
+                IEnumerable<Usuario> DbObjeto = from dados in _webOkClassContext.Usuarios where dados.Email == email select dados;
+                usuario = DbObjeto.First();
+                return Json(usuario);
+            }                       
+            
         }
 
     }

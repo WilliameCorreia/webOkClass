@@ -11,7 +11,14 @@
             <div class="card">
                 <div class="card-header">
                     <h5 style="color: #3ebbec; font-size: 16px" class="title"> FAMETRO - GUILHERME ROCHA @DateTime.Now.ToString("HH:mm:ss") </h5>
-                    {{Usuario.tipoFuncionario}}
+                    <div>
+                        <ul>
+                            <li><p>Usuario : {{Usuario.nome}}</p></li>
+                            <li>Tipo de usuario: {{Usuario.tipoFuncionario}}</li>
+                            <li>sala reservada : {{DbSala.numeroDaSala}}</li>
+                            <li>reserva : {{SalaReservada}}</li>
+                        </ul>
+                    </div>
                     <div class="filtro">
                         <label>PESQUISAR</label>
                         <select ng-model="filtro" class="btn-dark">
@@ -31,18 +38,17 @@
                         <div ng-repeat="sala in mydata | filter: {'statusDaSala': filtro}" id="{{sala.salaDeAulaId}}" class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
 
                             <div class="font-icon-detail  {{'cor' + sala.statusDaSala}}">
-
                                 <img src="~/images/icons/81419d8a9c.png" />
                                 <P><H2>SALA {{sala.numeroDaSala}}</H2></P>
                                 <div class="buttonSala">
-                                    <select ng-disabled="sala.statusDaSala == '3'" class="btn-dark" ng-model="status.selecionado">
+                                    <select ng-disabled="Reserva(sala.statusDaSala, sala.numeroDaSala, DbSala.numeroDaSala)" class="btn-dark" ng-model="status.selecionado">
                                         <option value="">Selecione</option>
-                                        <option data-ng-if="Usuario.tipoFuncionario == 1" value="1">Entrar nesta Sala</option>
-                                        <option data-ng-if="Usuario.tipoFuncionario == 1 || Usuario.tipoFuncionario == 2" value="2">Liberar Sala</option>
-                                        <option data-ng-if="Usuario.tipoFuncionario == 1" value="3">Reservar esta Sala</option>
-                                        <option data-ng-if="Usuario.tipoFuncionario == 2" value="4">Limpar Sala</option>
+                                        <option id="Entrar" data-ng-if="opcoes1(Usuario.tipoFuncionario)" value="1">Entrar nesta Sala</option>
+                                        <option id="Liberar" value="2">Liberar Sala</option>
+                                        <option id="Reservar" data-ng-if="opcoes1(Usuario.tipoFuncionario, DbSala.numeroDaSala)" value="3">Reservar esta Sala</option>
+                                        <option id="Limpar" data-ng-if="opcoes2(Usuario.tipoFuncionario)" value="4">Limpar Sala</option>
                                     </select>
-                                    <button ng-if="status.selecionado" id="{{sala.salaDeAulaId}}" class="btn btn-dark" ng-click="statusSala(status)">ok</button>
+                                    <button ng-if="status.selecionado" id="{{sala.salaDeAulaId}}" class="btn btn-dark" ng-click="statusSala(status, Usuario.usuarioId)">ok</button>
                                 </div>
                             </div>
 

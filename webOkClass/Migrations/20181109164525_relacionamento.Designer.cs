@@ -10,8 +10,8 @@ using webOkClass.DataContext;
 namespace webOkClass.Migrations
 {
     [DbContext(typeof(WebOkClassContext))]
-    [Migration("20181104203310_add-campos_validacao")]
-    partial class addcampos_validacao
+    [Migration("20181109164525_relacionamento")]
+    partial class relacionamento
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,27 @@ namespace webOkClass.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("webOkClass.Models.ReservaSala", b =>
+                {
+                    b.Property<int>("ReservaSalaID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SalaDeAulaId");
+
+                    b.Property<int>("StatusReserva");
+
+                    b.Property<int>("UsuarioId");
+
+                    b.HasKey("ReservaSalaID");
+
+                    b.HasIndex("SalaDeAulaId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("reservas");
+                });
 
             modelBuilder.Entity("webOkClass.Models.SalaDeAula", b =>
                 {
@@ -48,25 +69,26 @@ namespace webOkClass.Migrations
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
                     b.Property<string>("Matricula")
                         .IsRequired()
-                        .HasMaxLength(10);
+                        .HasMaxLength(15);
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(10);
+                        .HasMaxLength(15);
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(15);
 
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("Sobrenome")
                         .IsRequired()
-                        .HasMaxLength(10);
-
-                    b.Property<int>("Status");
+                        .HasMaxLength(15);
 
                     b.Property<int>("TipoFuncionario");
 
@@ -75,6 +97,19 @@ namespace webOkClass.Migrations
                     b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("webOkClass.Models.ReservaSala", b =>
+                {
+                    b.HasOne("webOkClass.Models.SalaDeAula", "SalaDeAula")
+                        .WithMany()
+                        .HasForeignKey("SalaDeAulaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("webOkClass.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

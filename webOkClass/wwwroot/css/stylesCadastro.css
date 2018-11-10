@@ -10,16 +10,17 @@ h2 {
 }
 
 form {
-    margin-left: 30%;
-    margin-right: 30%
+    margin-left: 25%;
+    margin-right: 25%
 }
 
 #BtnCadastra {
     text-align: right;
+    margin-top: 10px;
 }
 
 .form div {
-    margin-top: 5px;
+    margin: 15px;
 }
 
 .form-row div {

@@ -8,18 +8,19 @@ namespace webOkClass.Models
 {
     public class Usuario: Login
     {
+     
         public int UsuarioId { get; set; }
 
         [Required]
-        [StringLength(10, MinimumLength = 6, ErrorMessage = "A matricula deve ter entre 6 e 10 caracteres")]
+        [StringLength(15, MinimumLength = 6, ErrorMessage = "A matricula deve ter entre 6 e 15 caracteres")]
         public string Matricula { get; set; }
 
         [Required]
-        [StringLength(10, MinimumLength = 4, ErrorMessage = "A nome deve ter entre 6 e 10 caracteres")]
+        [StringLength(15, MinimumLength = 4, ErrorMessage = "A nome deve ter entre 6 e 15 caracteres")]
         public string Nome { get; set; }
 
         [Required]
-        [StringLength(10, MinimumLength = 4, ErrorMessage = "A sobrenome deve ter entre 6 e 10 caracteres")]
+        [StringLength(15, MinimumLength = 4, ErrorMessage = "A sobrenome deve ter entre 6 e 15 caracteres")]
         public string Sobrenome { get; set; }
 
         [Required]
@@ -27,14 +28,9 @@ namespace webOkClass.Models
 
         [Required]
         public int TipoFuncionario { get; set; }
-
-        public ContactStatus Status { get; set; }
+       
+        
     }
 
-    public enum ContactStatus
-    {
-        Submitted,
-        Approved,
-        Rejected
-    }
+    
 }
