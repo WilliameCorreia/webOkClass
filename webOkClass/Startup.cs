@@ -41,11 +41,9 @@ namespace webOkClass
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });            
 
-            var connection = @"Server=tcp:webokclassdbserver.database.windows.net,1433;Initial Catalog=webOkClass_db;Persist Security Info=False;User ID=williame;Password=Wcl193119;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            var connection = @"Server = (localdb)\MSSQLLocalDB; Initial Catalog = WebOkClass; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
             services.AddDbContext<WebOkClassContext>(options => options.UseSqlServer(connection));
-            //string de coneção com azure
-            //@"Server = (localdb)\MSSQLLocalDB; Initial Catalog = WebOkClass; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
-            //@"Server=tcp:webokclassdbserver.database.windows.net,1433;Initial Catalog=webOkClass_db;Persist Security Info=False;User ID=williame;Password=Wcl193119;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            //string de coneção com azure        
         }
 
 
