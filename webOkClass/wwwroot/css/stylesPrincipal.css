@@ -6,17 +6,26 @@
 img{
     width: 50px;
 }
-.cor1 {
-    border: 2px solid red !important;
+.active a {
+    font-size: 16px!important;
 }
-.cor2 {   
-    border: 2px solid #0ef30e !important;
+.collapseLi a{
+    padding: 0px!important;
+}
+.cor1 {
+    border: 3px solid red !important;
+}
+.cor2 {
+    border: 3px solid black !important;
 }
 .cor3 {
-    border: 2px solid yellow !important;
+    border: 3px solid yellow !important;
 }
 .cor4 {
-    border: 2px solid black!important;
+    border: 3px solid blue !important;
+}
+.cor5 {
+    border: 3px solid #0ef30e !important;
 }
 .buttonSala {
     display: grid;

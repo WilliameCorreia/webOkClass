@@ -217,11 +217,28 @@ namespace webOkClass.Controllers
         }
 
         [HttpPost]
-        public void UpdateSala(int valor, int id)
+        public void UpdateSala(int valor, int id, int statusReserva = 0, int usuario = 0)
         {
             if (valor != 0 && id != 0)
             {
                 SalaDeAula sala = new SalaDeAula();
+                ReservaSala reserva = new ReservaSala();
+
+                if (statusReserva == 1 && statusReserva != 0)
+                {
+                    IEnumerable<ReservaSala> DbSalas = from dbReserva in _webOkClassContext.reservas
+                              where dbReserva.UsuarioId == usuario && dbReserva.StatusReserva == 1
+                              select dbReserva;
+
+                    if(DbSalas.Count() != 0)
+                    {
+                        reserva = DbSalas.First();
+
+                        reserva.StatusReserva = 2;
+                    }
+                    
+                }
+                
 
                 sala = _webOkClassContext.Salas.Find(id);
 

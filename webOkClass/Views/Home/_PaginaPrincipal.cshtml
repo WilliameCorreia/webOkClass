@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "_PaginaPrincipal";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
@@ -23,10 +22,12 @@
                         <label>PESQUISAR</label>
                         <select ng-model="filtro" class="btn-dark">
                             <option value="">Todas as Salas</option>
+                            <option value="5">Liberadas</option>
                             <option value="1">Ocupadas</option>
-                            <option value="2">Liberadas</option>
+                            <option value="2">Desocupadas</option>
                             <option value="3">Reservadas</option>
-                            <option value="4">Em Limpeza</option>
+                            <option value="4">Limpa</option>
+
                         </select>
                     </div>
                     <div>
@@ -44,11 +45,12 @@
                                     <select ng-disabled="Reserva(sala.statusDaSala, sala.numeroDaSala, DbSala.numeroDaSala)" class="btn-dark" ng-model="status.selecionado">
                                         <option value="">Selecione</option>
                                         <option id="Entrar" data-ng-if="opcoes1(Usuario.tipoFuncionario)" value="1">Entrar nesta Sala</option>
-                                        <option id="Liberar" value="2">Liberar Sala</option>
+                                        <option id="Liberar" data-ng-if="opcoes1(Usuario.tipoFuncionario)" value="2">Sair da Sala</option>
                                         <option id="Reservar" data-ng-if="opcoes1(Usuario.tipoFuncionario, DbSala.numeroDaSala)" value="3">Reservar esta Sala</option>
                                         <option id="Limpar" data-ng-if="opcoes2(Usuario.tipoFuncionario)" value="4">Limpar Sala</option>
+                                        <option id="Limpar" data-ng-if="opcoes2(Usuario.tipoFuncionario)" value="5">Fechar Sala</option>
                                     </select>
-                                    <button ng-if="status.selecionado" id="{{sala.salaDeAulaId}}" class="btn btn-dark" ng-click="statusSala(status, Usuario.usuarioId)">ok</button>
+                                    <button ng-if="status.selecionado" id="{{sala.salaDeAulaId}}" class="btn btn-dark" ng-click="statusSala(status, Usuario.usuarioId, SalaReservada)">ok</button>
                                 </div>
                             </div>
 

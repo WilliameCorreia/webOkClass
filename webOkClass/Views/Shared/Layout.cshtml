@@ -41,30 +41,58 @@
                 </div>
                 <ul class="nav">
                     <li class="active ">
-                        <a href="@Url.Action("_PaginaPrincipal", "Home")">
+                        <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <i class="tim-icons icon-app"></i>
-                            <p style="font-size: 16px;">Salas</p>
+                            Unidades
                         </a>
+                        <ul class="collapse" id="collapseExample">
+                            <li class="collapseLi">
+                                <a href="@Url.Action("_PaginaPrincipal", "Home")">
+                                    <p style="font-size: 16px;">Guilherme Rocha</p>
+                                </a>
+                            </li>
+                            <li class="collapseLi">
+                                <a href="@Url.Action("_PaginaPrincipal", "Home")">
+                                    <p style="font-size: 16px;">Cons. Estelita</p>
+                                </a>
+                            </li>
+                            <li class="collapseLi">
+                                <a href="@Url.Action("_PaginaPrincipal", "Home")">
+                                    <p style="font-size: 16px;">Carneiro da Cunha</p>
+                                </a>
+                            </li>
+                            <li class="collapseLi">
+                                <a href="@Url.Action("_PaginaPrincipal", "Home")">
+                                    <p style="font-size: 16px;">Padre Ibiapina</p>
+                                </a>
+                            </li>
+                            <li class="collapseLi">
+                                <a href="@Url.Action("_PaginaPrincipal", "Home")">
+                                    <p style="font-size: 16px;">Maracanaú</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
+                    <li class="active ">
                         <a href="@Url.Action("Painel","Home")">
                             <i class="tim-icons icon-chart-pie-36"></i>
                             <p style="font-size: 16px;">Painel</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="active ">
                         <a href="@Url.Action("PerfilUsuario","Home")">
                             <i class="tim-icons icon-single-02"></i>
                             <p style="font-size: 16px;">Perfil de Usuário</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="active ">
                         <a href="@Url.Action("Historico","Home")">
                             <i class="tim-icons icon-notes"></i>
                             <p style="font-size: 16px;">Histórico</p>
                         </a>
                     </li>
                 </ul>
+               
             </div>
         </div>
         <div class="main-panel" ng-controller="MeuAppCtrl">
@@ -87,68 +115,19 @@
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navigation">
-                        <ul class="navbar-nav ml-auto">
-                            <li id="teste">@Model.Email</li>
-                            <li class="search-bar input-group">
-                                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"></button>
-                            </li>
-                            <li class="search-bar input-group">
-                                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
-                                    <i class="tim-icons icon-zoom-split"></i>
-                                    <span class="d-lg-none d-md-block">Search</span>
+                        <ul class="navbar-nav ml-auto">                                                                                                          
+                            <li class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div id="teste">@Model.Email</div>
                                 </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a href="javascript:void(0)" class="nav-item dropdown-item">Perfil</a>
+                                    <a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a>
+                                    <a href="@Url.Action("Index","Home")" class="nav-item dropdown-item">Sair</a>
+                                </div>
                             </li>
-                            <li class="dropdown nav-item">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <div class="notification d-none d-lg-block d-xl-block"></div>
-                                    <i class="tim-icons icon-sound-wave"></i>
-                                    <p class="d-lg-none">
-                                        Notifications
-                                    </p>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                                    <li class="nav-link">
-                                        <a href="#" class="nav-item dropdown-item">.......</a>
-                                    </li>
-                                    <li class="nav-link">
-                                        <a href="javascript:void(0)" class="nav-item dropdown-item">.......</a>
-                                    </li>
-                                    <li class="nav-link">
-                                        <a href="javascript:void(0)" class="nav-item dropdown-item">.......</a>
-                                    </li>
-                                    <li class="nav-link">
-                                        <a href="javascript:void(0)" class="nav-item dropdown-item">.......</a>
-                                    </li>
-                                    <li class="nav-link">
-                                        <a href="javascript:void(0)" class="nav-item dropdown-item">.......</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown nav-item">
-                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <div class="photo">
-                                        <img src="../assets/img/fametro.png" alt="Profile Photo">
-                                    </div>
-                                    <b class="caret d-none d-lg-block d-xl-block"></b>
-                                    <p class="d-lg-none">
-                                        Log out
-                                    </p>
-                                </a>
-                                <ul class="dropdown-menu dropdown-navbar">
-                                    <li class="nav-link">
-                                        <a href="javascript:void(0)" class="nav-item dropdown-item">Perfil</a>
-                                    </li>
-                                    <li class="nav-link">
-                                        <a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a>
-                                    </li>
-                                    <li class="dropdown-divider"></li>
-                                    <li class="nav-link">
-                                        <a href="@Url.Action("Index","Home")" class="nav-item dropdown-item">Sair</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="separator d-lg-none"></li>
                         </ul>
+                        
                     </div>
                 </div>
             </nav>

@@ -10,6 +10,7 @@ namespace webOkClass.DataContext
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<SalaDeAula> Salas { get; set; }
         public DbSet<ReservaSala> reservas { get; set; }
+        public DbSet<SalaOcupada> salaOcupadas { get; set; }
 
     }
 }

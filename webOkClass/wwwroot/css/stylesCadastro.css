@@ -29,3 +29,13 @@ form {
 nav form{
     margin: 0;
 }
+.modal{
+    right: auto!important;
+    left: auto!important;
+}
+@media(max-width: 576px){
+    form {
+         margin-left: 0%; 
+         margin-right: 0%; 
+    }
+}
