@@ -57,6 +57,27 @@ namespace webOkClass.Migrations
                     b.ToTable("Salas");
                 });
 
+            modelBuilder.Entity("webOkClass.Models.SalaOcupada", b =>
+                {
+                    b.Property<int>("SalaOcupadaID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SalaDeAulaId");
+
+                    b.Property<int>("StatusSalaOcupada");
+
+                    b.Property<int>("UsuarioId");
+
+                    b.HasKey("SalaOcupadaID");
+
+                    b.HasIndex("SalaDeAulaId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("salaOcupadas");
+                });
+
             modelBuilder.Entity("webOkClass.Models.Usuario", b =>
                 {
                     b.Property<int>("UsuarioId")
@@ -84,6 +105,8 @@ namespace webOkClass.Migrations
 
                     b.Property<string>("PasswordHash");
 
+                    b.Property<int?>("SalaDeAulaId");
+
                     b.Property<string>("Sobrenome")
                         .IsRequired()
                         .HasMaxLength(15);
@@ -94,13 +117,15 @@ namespace webOkClass.Migrations
 
                     b.HasKey("UsuarioId");
 
+                    b.HasIndex("SalaDeAulaId");
+
                     b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("webOkClass.Models.ReservaSala", b =>
                 {
                     b.HasOne("webOkClass.Models.SalaDeAula", "SalaDeAula")
-                        .WithMany()
+                        .WithMany("Reserva")
                         .HasForeignKey("SalaDeAulaId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -108,6 +133,26 @@ namespace webOkClass.Migrations
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("webOkClass.Models.SalaOcupada", b =>
+                {
+                    b.HasOne("webOkClass.Models.SalaDeAula", "SalaDeAula")
+                        .WithMany("SalaOcupada")
+                        .HasForeignKey("SalaDeAulaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("webOkClass.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("webOkClass.Models.Usuario", b =>
+                {
+                    b.HasOne("webOkClass.Models.SalaDeAula")
+                        .WithMany("Usuario")
+                        .HasForeignKey("SalaDeAulaId");
                 });
 #pragma warning restore 612, 618
         }

@@ -15,7 +15,6 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
 
     //chamada da função
     CarregarSalas();
-
     
     //carrega o usuario logado e suas reservas
     CarregarUsuario = function () {
@@ -24,8 +23,7 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
             method: 'POST',
             url: '/Home/CarregarUsuario',
             params: { 'email': valor }
-        }).then(function (data, status, headers, config) {
-            console.log(data.data);
+        }).then(function (data, status, headers, config) {            
             if (data.data.usuario != undefined) {
                 $scope.Usuario = data.data.usuario;
                 $scope.SalaReservada = data.data.statusReserva;
@@ -40,47 +38,54 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
     };
 
     //chamada da função
-    CarregarUsuario();
-
-   
+    CarregarUsuario();   
 
     //verifica a sala reservada e quem reservou
-    $scope.Reserva = function (statusDaSala, numeroDaSala, DbSalaNumeroDaSala) {
-        if (statusDaSala == '3') {
-            if (numeroDaSala == DbSalaNumeroDaSala) {
+    $scope.SalaOcupada = function (statusDaSala, salaOcupada, Usuario) {
+
+        if (statusDaSala == 1) {
+            var sala = salaOcupada[0];
+            if (salaOcupada.length == 1 && sala.usuario.usuarioId == Usuario.usuarioId) {
                 return false;
-            } else {
+            }
+            else {
                 return true;
-            }                     
-        }
-        else {
+            }
+        } else {
             return false;
         }
+        
 
     }   
 
     //verifica o tipo de usuario e define as opçoes disponiveis
-    $scope.opcoes1 = function (tipoFuncionario, numeroDaSala) {
-        if (tipoFuncionario == 1) {
-            if (numeroDaSala == undefined) {
+    $scope.opcoes1 = function (usuario, sala) {
+        switch (usuario.tipoFuncionario) {
+            case 1: {
                 return true;
-            } else {
+            }break;
+            case 2: {
                 return false;
-            }      
-        } else {
-            return false;
+            }break;
+
         }
         
     }
 
     //verifica o tipo de usuario e define as opçoes disponiveis
-    $scope.opcoes2 = function (tipoFuncionario, numeroDaSala) {
-        if (tipoFuncionario == 2) {
-            return true;
-        } else {
-            return false;
+    $scope.opcoes2 = function (usuario, sala) {
+        switch (usuario.tipoFuncionario) {
+            case 1: {
+                return false;
+            }
+                break;
+            case 2: {
+                return true;
+            }
+                break;
+
         }
-        
+
     }
     
     //Envia os status das salas para alterções no banco de dados
@@ -93,6 +98,17 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
         var valor = parseInt(status.selecionado);
         var usuario = parseInt(usuario);
 
+        if (valor == 1 || valor == 2) {
+            $http({
+                method: 'POST',
+                url: '/Home/OcuparSala',
+                params: { 'id': id, 'valor': valor, 'usuario': usuario }
+            }).then(function (data, status, headers, config) {
+                CarregarSalas();
+                CarregarUsuario();
+                });   
+        };
+        
         if (valor == 3) {
             $http({
                 method: 'POST',
@@ -111,7 +127,7 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
                 CarregarSalas();
                 CarregarUsuario();
             });
-        }    
+        };    
     };
 
     //atualização automaticas das informações com o banco de dados 

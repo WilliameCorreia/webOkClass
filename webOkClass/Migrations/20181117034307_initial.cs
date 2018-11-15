@@ -38,11 +38,18 @@ namespace webOkClass.Migrations
                     Nome = table.Column<string>(maxLength: 15, nullable: false),
                     Sobrenome = table.Column<string>(maxLength: 15, nullable: false),
                     Campus = table.Column<int>(nullable: false),
-                    TipoFuncionario = table.Column<int>(nullable: false)
+                    TipoFuncionario = table.Column<int>(nullable: false),
+                    SalaDeAulaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.UsuarioId);
+                    table.ForeignKey(
+                        name: "FK_Usuarios_Salas_SalaDeAulaId",
+                        column: x => x.SalaDeAulaId,
+                        principalTable: "Salas",
+                        principalColumn: "SalaDeAulaId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,6 +79,33 @@ namespace webOkClass.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "salaOcupadas",
+                columns: table => new
+                {
+                    SalaOcupadaID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    StatusSalaOcupada = table.Column<int>(nullable: false),
+                    UsuarioId = table.Column<int>(nullable: false),
+                    SalaDeAulaId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_salaOcupadas", x => x.SalaOcupadaID);
+                    table.ForeignKey(
+                        name: "FK_salaOcupadas_Salas_SalaDeAulaId",
+                        column: x => x.SalaDeAulaId,
+                        principalTable: "Salas",
+                        principalColumn: "SalaDeAulaId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_salaOcupadas_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "UsuarioId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_reservas_SalaDeAulaId",
                 table: "reservas",
@@ -81,6 +115,21 @@ namespace webOkClass.Migrations
                 name: "IX_reservas_UsuarioId",
                 table: "reservas",
                 column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_salaOcupadas_SalaDeAulaId",
+                table: "salaOcupadas",
+                column: "SalaDeAulaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_salaOcupadas_UsuarioId",
+                table: "salaOcupadas",
+                column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_SalaDeAulaId",
+                table: "Usuarios",
+                column: "SalaDeAulaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -89,10 +138,13 @@ namespace webOkClass.Migrations
                 name: "reservas");
 
             migrationBuilder.DropTable(
-                name: "Salas");
+                name: "salaOcupadas");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
+
+            migrationBuilder.DropTable(
+                name: "Salas");
         }
     }
 }
