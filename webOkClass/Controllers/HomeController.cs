@@ -225,6 +225,7 @@ namespace webOkClass.Controllers
             foreach (var teste in DbSalas)
             {
                 teste.SalaOcupada = teste.SalaOcupada.Where(ocupada => ocupada.StatusSalaOcupada == 1).ToList();
+                teste.Reserva = teste.Reserva.Where(reserva => reserva.StatusReserva == 1).ToList();
             }
 
             salas = DbSalas.ToList();
@@ -238,22 +239,7 @@ namespace webOkClass.Controllers
             if (valor != 0 && id != 0)
             {
                 SalaDeAula sala = new SalaDeAula();
-                ReservaSala reserva = new ReservaSala();
-
-                if (statusReserva == 1 && statusReserva != 0)
-                {
-                    IEnumerable<ReservaSala> DbSalas = from dbReserva in _webOkClassContext.reservas
-                                                       where dbReserva.UsuarioId == usuario && dbReserva.StatusReserva == 1
-                                                       select dbReserva;
-
-                    if (DbSalas.Count() != 0)
-                    {
-                        reserva = DbSalas.First();
-
-                        reserva.StatusReserva = 2;
-                    }
-
-                }
+                ReservaSala reserva = new ReservaSala();               
 
 
                 sala = _webOkClassContext.Salas.Find(id);
@@ -262,15 +248,17 @@ namespace webOkClass.Controllers
 
                 _webOkClassContext.SaveChanges();
             }
-            else
-            {
-
-            }
+           
         }       
 
         [HttpPost]
-        public void SalaReservar(int valor, int id, int usuario)
+        public void SalaReservar(int valor, int id, int usuario, int statusReserva = 0)
         {
+            if (statusReserva == 1 && statusReserva != 0)
+            {
+                alterarStatusReserva(statusReserva, usuario);
+            }
+          
             ReservaSala reservaSala = new ReservaSala();
             reservaSala.StatusReserva = 1;
             reservaSala.SalaDeAulaId = id;
@@ -284,10 +272,37 @@ namespace webOkClass.Controllers
 
         }
 
+        public void alterarStatusReserva(int statusReserva, int usuario)
+        {
+            if (statusReserva == 1 && statusReserva != 0)
+            {
+                ReservaSala reserva = new ReservaSala();
+
+                IEnumerable<ReservaSala> DbSalas = from dbReserva in _webOkClassContext.reservas
+                                                   where dbReserva.UsuarioId == usuario && dbReserva.StatusReserva == 1
+                                                   select dbReserva;
+
+                if (DbSalas.Count() != 0)
+                {
+                    reserva = DbSalas.First();
+
+                    reserva.StatusReserva = 2;
+
+                    _webOkClassContext.SaveChanges();
+                }
+                
+            }
+        }
+
         [HttpPost]
-        public void OcuparSala(int valor, int id, int usuario)
+        public void OcuparSala(int valor, int id, int usuario,int statusReserva)
         {
             SalaOcupada ocuparSala = new SalaOcupada();
+
+            if (statusReserva == 1 && statusReserva != 0)
+            {
+                alterarStatusReserva(statusReserva, usuario);
+            }
 
             if (valor == 1)
             {                
@@ -302,8 +317,9 @@ namespace webOkClass.Controllers
             {
                 ocuparSala = _webOkClassContext.salaOcupadas.Where(x => x.SalaDeAulaId == id).First();
                 ocuparSala.StatusSalaOcupada = valor;
+                _webOkClassContext.SaveChanges();
             }
-            _webOkClassContext.SaveChanges();
+            
             UpdateSala(valor,id);
 
         }

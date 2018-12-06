@@ -10,14 +10,14 @@
             <div class="card">                
                 <div class="card-header">
                     <h5 style="color: #3ebbec; font-size: 16px" class="title"> FAMETRO - GUILHERME ROCHA @DateTime.Now.ToString("HH:mm:ss") </h5>
-                    <div>
+                    @*<div>
                         <ul>
                             <li><p>Usuario : {{Usuario.nome}}</p></li>
                             <li>Tipo de usuario: {{Usuario.tipoFuncionario}}</li>
-                            @*<li>sala reservada : {{DbSala.numeroDaSala}}</li>
-                            <li>reserva : {{SalaReservada}}</li>*@
+                            <li>sala reservada : {{DbSala.numeroDaSala}}</li>
+                            <li>reserva : {{SalaReservada}}</li>
                         </ul>
-                    </div>
+                    </div>*@
                     <div class="filtro">
                         <label>PESQUISAR</label>
                         <select ng-model="filtro" class="btn-dark">
@@ -40,24 +40,23 @@
                         <div ng-repeat="sala in mydata | filter: {'statusDaSala': filtro}" id="{{sala.salaDeAulaId}}" class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
 
                             <div class="font-icon-detail  {{'cor' + sala.statusDaSala}}">
-                                @*<div>
-                                    {{sala.reserva[0].usuario.nome}}
-                                </div>*@
+                                <div class="datepicker">
+                                   
+                                </div>
                                 <img src="~/images/icons/81419d8a9c.png" />
                                 <P><H2>SALA {{sala.numeroDaSala}}</H2></P>
                                 <div class="buttonSala">
-                                    <select ng-disabled="SalaOcupada(sala.statusDaSala, sala.salaOcupada, Usuario)" class="btn-dark" ng-model="status.selecionado">
+                                    <select ng-disabled="SalaOcupada(sala, Usuario)" class="btn-dark" ng-model="status.selecionado">
                                         <option value="">Selecione</option>
                                         <option id="Entrar" data-ng-if="opcoes1(Usuario, sala)" value="1">Entrar nesta Sala</option>
                                         <option id="Liberar" data-ng-if="opcoes1(Usuario, sala)" value="2">Sair da Sala</option>
-                                        @*<option id="Reservar" data-ng-if="opcoes1(Usuario, sala)" value="3">Reservar esta Sala</option>*@
+                                        <option id="Reservar" data-ng-if="opcoes1(Usuario, sala)" value="3">Reservar esta Sala</option>
                                         <option id="Limpar" data-ng-if="opcoes2(Usuario, sala)" value="4">Limpar Sala</option>
                                         <option id="Fechar" data-ng-if="opcoes2(Usuario, sala)" value="5">Fechar Sala</option>
                                     </select>
                                     <button ng-if="status.selecionado" id="{{sala.salaDeAulaId}}" class="btn btn-dark" ng-click="statusSala(status, Usuario.usuarioId, SalaReservada)">ok</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -40,15 +40,35 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
     //chamada da função
     CarregarUsuario();   
 
-    //verifica a sala reservada e quem reservou
-    $scope.SalaOcupada = function (statusDaSala, salaOcupada, Usuario) {
-
-        if (statusDaSala == 1) {
-            var sala = salaOcupada[0];
-            if (salaOcupada.length == 1 && sala.usuario.usuarioId == Usuario.usuarioId) {
+    //verifica a sala reservada/ocupada e quem reservou/ocupou
+    $scope.SalaOcupada = function (Sala, Usuario) {
+        if (Sala.statusDaSala == 1) {
+            var salaValor;
+            Sala.salaOcupada.forEach(function (sala) {
+                if (sala.statusSalaOcupada == 1) {
+                    salaValor = sala;
+                }                
+            });
+            
+            if (salaValor.statusSalaOcupada = 1 && salaValor.usuario.usuarioId == Usuario.usuarioId) {
                 return false;
             }
             else {
+                return true;
+            }
+        }
+
+        if (Sala.statusDaSala == 3) {
+            var ReservaValor;
+            Sala.reserva.forEach(function (reserva) {
+                if (reserva.statusReserva == 1) {
+                    ReservaValor = reserva;
+                }
+            })
+
+            if (ReservaValor.statusReserva == 1 && ReservaValor.usuario.usuarioId == Usuario.usuarioId) {
+                return false;
+            } else {
                 return true;
             }
         } else {
@@ -60,6 +80,7 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
 
     //verifica o tipo de usuario e define as opçoes disponiveis
     $scope.opcoes1 = function (usuario, sala) {
+       
         switch (usuario.tipoFuncionario) {
             case 1: {
                 return true;
@@ -102,7 +123,7 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
             $http({
                 method: 'POST',
                 url: '/Home/OcuparSala',
-                params: { 'id': id, 'valor': valor, 'usuario': usuario }
+                params: { 'id': id, 'valor': valor, 'usuario': usuario, 'statusReserva': statusReserva }
             }).then(function (data, status, headers, config) {
                 CarregarSalas();
                 CarregarUsuario();
@@ -113,12 +134,15 @@ app.controller("MeuAppCtrl", function ($scope, $http, $interval) {
             $http({
                 method: 'POST',
                 url: '/Home/SalaReservar',
-                params: { 'id': id, 'valor': valor, 'usuario': usuario }
+                params: { 'id': id, 'valor': valor, 'usuario': usuario, 'statusReserva': statusReserva }
             }).then(function (data, status, headers, config) {
                 CarregarSalas();
                CarregarUsuario();
             });
-        } else {
+
+        }
+
+        if (valor == 4 || valor == 5) {
             $http({
                 method: 'POST',
                 url: '/Home/UpdateSala',
